@@ -49,6 +49,14 @@ jobs:
       - name: Push Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/eureka-server:latest
 
+      - name: Debug secrets
+        run: |
+          echo "ResourceGroup length: ${#RESOURCE_GROUP}"
+          echo "ClusterName length: ${#CLUSTER_NAME}"
+        env:
+          RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
+          CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+
       - name: Azure Login
         uses: azure/login@v1
         with:
